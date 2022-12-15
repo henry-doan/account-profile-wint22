@@ -1,12 +1,17 @@
+import { AccountConsumer } from "../../providers/AccountProvider";
 
 const Account = () => (
-  <>
-    <h1>username</h1>
-    <p>
-      Date joined: created_at
-    </p>
-    <p>Membership Level: level</p>
-  </>
+  <AccountConsumer>
+    { value => (
+      <>
+        <h1>{value.username}</h1>
+        <p>
+          Date joined: {value.dateJoined}
+        </p>
+        <p>Membership Level: {value.level}</p>
+      </>
+    )}
+  </AccountConsumer>
 )
 
 export default Account;

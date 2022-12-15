@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import { AccountConsumer } from '../../providers/AccountProvider';
 
-const AccountForm = ({}) => {
+// if it is a { return()} then we need to create a wrapper component
+// to wrap the consumer with our Component
+const AccountForm = ({ updateAccount }) => {
   const [user, setUser] = useState({ username: '', level: '' })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    updateAccount(1, user)
+    setUser({ username: '', level: '' })
   }
 
   return(
@@ -36,4 +40,10 @@ const AccountForm = ({}) => {
   )
 }
 
-export default AccountForm;
+const ConnectedAccountForm = (props) => (
+  <AccountConsumer>
+    { value => <AccountForm {...props} {...value} />}
+  </AccountConsumer>
+)
+
+export default ConnectedAccountForm;
